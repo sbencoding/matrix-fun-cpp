@@ -160,7 +160,11 @@ public:
         if (!is_square()) throw std::runtime_error("Unable to get inverse of non-square matrix");
 
         if (n == 2) {
-            return *this * (1/get_determinant());
+            Matrix tmp2(data);
+            std::swap(tmp2.data[0][0], tmp2.data[1][1]);
+            tmp2.data[0][1] *= -1;
+            tmp2.data[1][0] *= -1;
+            return tmp2 * (1/get_determinant());
         }
 
         Matrix tmp(m, 2*n);
